@@ -56,14 +56,15 @@ JacobiSVD<Matrix<EIGTYPE, Dynamic, Dynamic, EIGCOLROW, Dynamic, Dynamic>, ColPiv
   magma_int_t ldvt, lwork, M, N, min_mn, nb, n2, info; \
   MAGMATYPE *h_A, *h_R, *h_U, *h_VT, *h_work; \
   MAGMATYPE *h_S1, *h_S2; \
-  char jobu, jobvt; \
+  /*char jobu, jobvt; */ \
+  magma_vec_t jobu, jobvt; \
   MAGMATYPE *u, *vt, dummy; \
 \
   M = m_rows; \
   N = m_cols; \
 \
-  jobu  = (m_computeFullU) ? 'A' : (m_computeThinU) ? 'S' : 'N'; \
-  jobvt = (m_computeFullV) ? 'A' : (m_computeThinV) ? 'S' : 'N'; \
+  jobu  = (m_computeFullU) ? MagmaAllVec : (m_computeThinU) ? MagmaSomeVec : MagmaNoVec; \
+  jobvt = (m_computeFullV) ? MagmaAllVec : (m_computeThinV) ? MagmaSomeVec : MagmaNoVec; \
   if (computeU()) { \
     ldu  = m_matrixU.outerStride(); \
     u    = (MAGMATYPE*)m_matrixU.data(); \
