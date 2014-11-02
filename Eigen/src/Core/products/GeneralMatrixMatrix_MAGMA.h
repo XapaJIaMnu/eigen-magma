@@ -112,9 +112,9 @@ static void run(Index rows, Index cols, Index depth, \
 	MAGMA_DEVALLOC( d_B, MAGMATYPE, lddb*Bn ); \
 	MAGMA_DEVALLOC( d_C, MAGMATYPE, lddc*N  ); \
 \
-	magma_dsetmatrix( Am, An, h_A, lda, d_A, ldda ); \
-	magma_dsetmatrix( Bm, Bn, h_B, ldb, d_B, lddb ); \
-	magma_dsetmatrix( M, N, h_C, ldc, d_C, lddc ); \
+	magma_##MAGMAPREFIXLOW##setmatrix( Am, An, h_A, lda, d_A, ldda ); \
+	magma_##MAGMAPREFIXLOW##setmatrix( Bm, Bn, h_B, ldb, d_B, lddb ); \
+	magma_##MAGMAPREFIXLOW##setmatrix( M, N, h_C, ldc, d_C, lddc ); \
 \
 	/* Set alpha_ & beta_ */ \
 	assign_scalar_eig2magma(alpha_, alpha); \
